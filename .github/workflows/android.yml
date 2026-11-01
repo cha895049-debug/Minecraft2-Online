@@ -1,0 +1,50 @@
+
+name: Build Minecraft 2.0 APK
+
+'on':
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential git zip unzip \
+            autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev \
+            libncursesw5-dev libtinfo6 cmake \
+            libffi-dev libssl-dev libltdl-dev
+
+      - name: Install Buildozer
+        run: |
+          python3 -m pip install --user --upgrade pip
+          python3 -m pip install --user buildozer cython==0.29.36
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Build Android APK
+        env:
+          BUILDOZER_WARN_ON_ROOT: '0'
+        run: buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Minecraft2-Android-APK
+          path: bin/*.apk
+          if-no-files-found: error
