@@ -1,0 +1,12 @@
+MOBILE UPLOAD GUIDE (ANDROID PHONE)
+
+1. Extract this ZIP using your phone's Files app (or ZArchiver).
+2. In Chrome, open https://github.com and sign in.
+3. Create a new repository. Choose a name such as Minecraft2-Online. Set it to Private or Public, and create it.
+4. Upload the PROJECT CONTENTS to the repository root: main.py, server.py, buildozer.spec, requirements.txt, README.txt, and the .github folder. Do not upload the outer ZIP or an extra Minecraft2_Online folder.
+5. If the phone's file picker hides folders beginning with a dot, create the workflow file manually in GitHub: Add file > Create new file, enter .github/workflows/android.yml, then paste the contents of the workflow file from this ZIP.
+6. Commit the files to the main branch. Open the repository's Actions tab.
+7. Open Build Minecraft 2.0 APK. If it has not started automatically, choose Run workflow.
+8. When it succeeds, open the run, scroll to Artifacts, and download Minecraft2-Android-APK. Extract the downloaded artifact ZIP to get the .apk file. Tap the APK to install; allow installation from this source if Android asks.
+
+IMPORTANT: This project is a Kivy 2D multiplayer prototype. The APK packages the game client only. The multiplayer server.py must run on a separate computer or hosted server, and SERVER_URL in main.py must point to that server.

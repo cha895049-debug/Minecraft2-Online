@@ -1,0 +1,5 @@
+kivy
+websocket-client
+
+# Multiplayer server host only:
+# websockets==12.0
